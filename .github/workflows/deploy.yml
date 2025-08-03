@@ -67,39 +67,39 @@ jobs:
       - name: Build and push Frontend
         run: |
           cd services/frontend
-          docker build --platform linux/amd64 -t $ECR_REGISTRY/gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }} .
-          docker push $ECR_REGISTRY/gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }}
+          docker build --platform linux/amd64 -t $ECR_REGISTRY/iit-gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }} .
+          docker push $ECR_REGISTRY/iit-gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }}
           
           # Also push as latest
-          docker tag $ECR_REGISTRY/gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }} $ECR_REGISTRY/gaming-microservices/frontend:latest
-          docker push $ECR_REGISTRY/gaming-microservices/frontend:latest
+          docker tag $ECR_REGISTRY/iit-gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }} $ECR_REGISTRY/iit-gaming-microservices/frontend:latest
+          docker push $ECR_REGISTRY/iit-gaming-microservices/frontend:latest
 
       - name: Build and push Gaming Service
         run: |
           cd services/gaming-service
-          docker build --platform linux/amd64 -t $ECR_REGISTRY/gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }} .
-          docker push $ECR_REGISTRY/gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }}
+          docker build --platform linux/amd64 -t $ECR_REGISTRY/iit-gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }} .
+          docker push $ECR_REGISTRY/iit-gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }}
           
-          docker tag $ECR_REGISTRY/gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }} $ECR_REGISTRY/gaming-microservices/gaming-service:latest
-          docker push $ECR_REGISTRY/gaming-microservices/gaming-service:latest
+          docker tag $ECR_REGISTRY/iit-gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }} $ECR_REGISTRY/iit-gaming-microservices/gaming-service:latest
+          docker push $ECR_REGISTRY/iit-gaming-microservices/gaming-service:latest
 
       - name: Build and push Order Service
         run: |
           cd services/order-service
-          docker build --platform linux/amd64 -t $ECR_REGISTRY/gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }} .
-          docker push $ECR_REGISTRY/gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }}
+          docker build --platform linux/amd64 -t $ECR_REGISTRY/iit-gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }} .
+          docker push $ECR_REGISTRY/iit-gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }}
           
-          docker tag $ECR_REGISTRY/gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }} $ECR_REGISTRY/gaming-microservices/order-service:latest
-          docker push $ECR_REGISTRY/gaming-microservices/order-service:latest
+          docker tag $ECR_REGISTRY/iit-gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }} $ECR_REGISTRY/iit-gaming-microservices/order-service:latest
+          docker push $ECR_REGISTRY/iit-gaming-microservices/order-service:latest
 
       - name: Build and push Analytics Service
         run: |
           cd services/analytics-service
-          docker build --platform linux/amd64 -t $ECR_REGISTRY/gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }} .
-          docker push $ECR_REGISTRY/gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }}
+          docker build --platform linux/amd64 -t $ECR_REGISTRY/iit-gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }} .
+          docker push $ECR_REGISTRY/iit-gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }}
           
-          docker tag $ECR_REGISTRY/gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }} $ECR_REGISTRY/gaming-microservices/analytics-service:latest
-          docker push $ECR_REGISTRY/gaming-microservices/analytics-service:latest
+          docker tag $ECR_REGISTRY/iit-gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }} $ECR_REGISTRY/iit-gaming-microservices/analytics-service:latest
+          docker push $ECR_REGISTRY/iit-gaming-microservices/analytics-service:latest
 
   # Job 2: Deploy to Kubernetes
   deploy:
