@@ -17,13 +17,13 @@ labels:
 
 images:
   - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/frontend
-    newTag: v20250803-221008-461d7a5
+    newTag: v20250803-221635-b41716c
   - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/gaming-service
-    newTag: v20250803-221008-461d7a5
+    newTag: v20250803-221635-b41716c
   - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/order-service
-    newTag: v20250803-221008-461d7a5
+    newTag: v20250803-221635-b41716c
   - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/analytics-service
-    newTag: v20250803-221008-461d7a5
+    newTag: v20250803-221635-b41716c
 
 replicas:
 - name: frontend
