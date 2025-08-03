@@ -103,7 +103,7 @@ All configuration is centralized at the top of the script:
 ```bash
 # AWS & EKS Configuration
 REGION="ap-southeast-1"
-ECR_REGISTRY="036160411895.dkr.ecr.ap-southeast-1.amazonaws.com"
+ECR_REGISTRY="776231021342.dkr.ecr.ap-southeast-1.amazonaws.com"
 NAMESPACE="lugx-gaming"
 EKS_CLUSTER_NAME="iit-test-dev-eks"
 
@@ -120,11 +120,11 @@ DB_PASSWORD="LionKing1234"
 🚀 Starting Gaming Microservices All-in-One Deployment...
 📍 Target: EKS Cluster 'iit-test-dev-eks' in region 'ap-southeast-1'
 🗄️  Database: iit-test-dev-db.cv0gc48uo7w1.ap-southeast-1.rds.amazonaws.com/lugx_gaming_dev
-📦 Registry: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com
+📦 Registry: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com
 
 ✅ Prerequisites check passed!
 🔧 Configuring kubectl for EKS cluster...
-✅ Connected to EKS cluster: arn:aws:eks:ap-southeast-1:036160411895:cluster/iit-test-dev-eks
+✅ Connected to EKS cluster: arn:aws:eks:ap-southeast-1:776231021342:cluster/iit-test-dev-eks
 🔐 Logging in to ECR...
 🗄️  Setting up RDS database...
 ✅ Database setup completed!

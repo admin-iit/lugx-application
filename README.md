@@ -127,7 +127,7 @@ kustomize/base/
 
 ### AWS Infrastructure
 
-- **EKS Cluster**: `036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/`
+- **EKS Cluster**: `776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/`
 - **ECR Registry**: Container image registry
 - **Load Balancer**: AWS Application Load Balancer via Ingress
 - **Persistent Storage**: EBS volumes for database persistence

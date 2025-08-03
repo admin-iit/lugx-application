@@ -4,8 +4,8 @@ metadata:
   name: app-config
 data:
   NODE_ENV: "development"
-  DB_HOST: "iit-psql-db.cfwsc626ix76.ap-southeast-1.rds.amazonaws.com"
-  DB_NAME: "postgres"
+  DB_HOST: "iit-test-dev-db.cv0gc48uo7w1.ap-southeast-1.rds.amazonaws.com"
+  DB_NAME: "app_database"
   DB_PORT: "5432"
   CLICKHOUSE_HOST: "clickhouse-service"
   CLICKHOUSE_PORT: "8123"

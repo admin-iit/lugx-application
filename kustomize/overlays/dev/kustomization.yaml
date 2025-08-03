@@ -16,14 +16,14 @@ labels:
     app.kubernetes.io/instance: dev
 
 images:
-  - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/frontend
-    newTag: v20250803-222426-889c4a9
-  - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/gaming-service
-    newTag: v20250803-222426-889c4a9
-  - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/order-service
-    newTag: v20250803-222426-889c4a9
-  - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/analytics-service
-    newTag: v20250803-222426-889c4a9
+- name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/frontend
+  newTag: port-fix-amd64-20250803-235857
+- name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/gaming-service
+  newTag: ssl-fix-20250803-233227
+- name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/order-service
+  newTag: ssl-fix-20250803-233400
+- name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/analytics-service
+  newTag: clickhouse-url-fixed
 
 replicas:
 - name: frontend
