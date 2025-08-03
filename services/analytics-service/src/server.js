@@ -34,9 +34,9 @@ const clickhouseClient = createClient({
   password: process.env.CLICKHOUSE_PASSWORD || '',
   database: process.env.CLICKHOUSE_DATABASE || 'analytics',
   request_timeout: 30000,
-  compression: {
-    response: true,
-    request: false
+  clickhouse_settings: {
+    async_insert: 1,
+    wait_for_async_insert: 0
   }
 });
 
@@ -106,6 +106,7 @@ app.get('/ready', async (req, res) => {
 
 // Routes
 app.use('/analytics', analyticsRoutes);
+app.use('/api/analytics', analyticsRoutes); // Add support for ALB routing
 
 // Initialize database tables for both PostgreSQL and ClickHouse
 const initializeDatabase = async () => {

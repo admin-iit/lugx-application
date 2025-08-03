@@ -289,4 +289,3 @@ kubectl exec -it <frontend-pod> -n gaming-microservices -- curl http://gaming-se
 ---
 
 **LUGX Gaming Platform** - Built with ❤️ for cloud-native gaming experiences 🚀
-# lugx-application
