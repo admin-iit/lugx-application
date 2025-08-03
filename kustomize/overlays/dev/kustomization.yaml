@@ -17,13 +17,13 @@ labels:
 
 images:
   - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/frontend
-    newTag: port-fix-amd64-20250803-235857
+    newTag: v20250803-221008-461d7a5
   - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/gaming-service
-    newTag: ssl-fix-20250803-233227
+    newTag: v20250803-221008-461d7a5
   - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/order-service
-    newTag: ssl-fix-20250803-233400
+    newTag: v20250803-221008-461d7a5
   - name: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/analytics-service
-    newTag: clickhouse-url-fixed
+    newTag: v20250803-221008-461d7a5
 
 replicas:
 - name: frontend
