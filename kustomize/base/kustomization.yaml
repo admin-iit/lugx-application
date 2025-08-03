@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+  - config.yaml
+  - secrets.yaml
+  - clickhouse.yaml
+  - frontend.yaml
+  - gaming-service.yaml
+  - order-service.yaml
+  - analytics-service.yaml
+  - ingress.yaml
+  - network-policy.yaml
+  - health-check.yaml
+
+labels:
+- pairs:
+    app: gaming-microservices
+    version: v1.0.0
+
+namespace: gaming-microservices
