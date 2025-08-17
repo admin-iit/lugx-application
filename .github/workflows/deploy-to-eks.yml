@@ -83,17 +83,6 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
-    - name: Build and push Health Check Service image
-      uses: docker/build-push-action@v5
-      with:
-        context: ./services/health-check
-        platforms: linux/amd64
-        push: true
-        tags: |
-          ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/health-check:latest
-          ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/health-check:${{ github.sha }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
 
     - name: Install kubectl
       uses: azure/setup-kubectl@v3
@@ -117,7 +106,6 @@ jobs:
         kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }}
         kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }}
         kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }}
-        kustomize edit set image health-check=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/health-check:${{ github.sha }}
         kubectl apply -k .
 
     - name: Deploy to EKS (Production)
@@ -128,7 +116,6 @@ jobs:
         kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }}
         kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }}
         kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }}
-        kustomize edit set image health-check=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/health-check:${{ github.sha }}
         kubectl apply -k .
 
     - name: Verify deployment
@@ -143,7 +130,6 @@ jobs:
         kubectl rollout status deployment/gaming-service -n lugx-gaming --timeout=300s
         kubectl rollout status deployment/order-service -n lugx-gaming --timeout=300s
         kubectl rollout status deployment/analytics-service -n lugx-gaming --timeout=300s
-        kubectl rollout status deployment/health-check -n lugx-gaming --timeout=300s
 
     - name: Run health checks
       run: |
