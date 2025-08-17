@@ -1,291 +1,297 @@
-# LUGX Gaming Platform - Cloud-Native Microservices
+# 🎮 Lugx Gaming Microservices Platform
 
-A modern cloud-native gaming platform built with microservices architecture, featuring automated CI/CD pipelines, Kubernetes deployment with Kustomize, and comprehensive service-to-service communication.
+A comprehensive cloud-native gaming platform built with microservices architecture, deployed on AWS EKS with complete CI/CD pipeline.
+
+![Lugx Gaming](https://img.shields.io/badge/Lugx-Gaming-red)
+![AWS EKS](https://img.shields.io/badge/AWS-EKS-orange)
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=white)
+
+## 🚀 Live Application
+
+**Frontend URL**: [http://k8s-lugxgami-gamingmi-04b5035527-659051128.ap-southeast-1.elb.amazonaws.com](http://k8s-lugxgami-gamingmi-04b5035527-659051128.ap-southeast-1.elb.amazonaws.com)
+
+### 📊 Key Pages:
+- **Home**: Landing page with platform overview
+- **Gaming**: [/gaming](http://k8s-lugxgami-gamingmi-04b5035527-659051128.ap-southeast-1.elb.amazonaws.com/gaming) - Browse and manage gaming products
+- **Analytics**: [/analytics](http://k8s-lugxgami-gamingmi-04b5035527-659051128.ap-southeast-1.elb.amazonaws.com/analytics) - Comprehensive RDS data dashboard
 
 ## 🏗️ Architecture Overview
 
 ```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Gaming Service  │    │  Order Service  │
-│   (React)       │    │   (Node.js)      │    │   (Node.js)     │
-│   Port: 80      │    │   Port: 3001     │    │   Port: 3002    │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Frontend      │    │  Gaming Service │    │  Order Service  │
+│   (React)       │    │   (Node.js)     │    │   (Node.js)     │
+│   Port: 8080    │    │   Port: 3001    │    │   Port: 3002    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          └───────────────────────┼───────────────────────┘
                                  │
-         ┌─────────────────┐     │     ┌─────────────────┐
-         │ Analytics Svc   │     │     │   PostgreSQL    │
-         │  (Node.js)      │─────┼─────│   Database      │
-         │  Port: 3003     │     │     │   Port: 5432    │
-         └─────────────────┘     │     └─────────────────┘
-                 │               │
-                 │               │
-         ┌─────────────────┐     │
-         │   ClickHouse    │─────┘
-         │   Analytics DB  │
-         │   Port: 8123    │
-         └─────────────────┘
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ Analytics Svc   │    │  Health Check   │    │   PostgreSQL    │
+│  (Node.js)      │    │   (Node.js)     │    │     RDS         │
+│  Port: 3003     │    │   Port: 3000    │    │   Port: 5432    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-## 🚀 Quick Start
+## 🛠️ Technology Stack
 
-### Prerequisites
+### Backend Services
+- **Node.js**: Runtime environment
+- **Express.js**: Web framework
+- **Sequelize**: PostgreSQL ORM
+- **JWT**: Authentication
 
-- **Docker & Docker Compose** - Container orchestration
-- **kubectl** - Kubernetes CLI tool
-- **kustomize** - Kubernetes configuration management
-- **AWS CLI** - For EKS deployment (configured with credentials)
-- **EKS Cluster Access** - Access to EKS cluster `iit-test-dev-eks` (or modify cluster name in script)
-- **Node.js 18+** - For local development (optional)
+### Frontend
+- **React 18**: UI framework
+- **React Router**: Client-side routing
+- **Context API**: State management
+- **CSS3**: Styling with red theme
 
-### 1. Production Deployment (Recommended)
+### Infrastructure
+- **AWS EKS**: Kubernetes orchestration
+- **AWS RDS**: PostgreSQL database
+- **AWS ALB**: Application Load Balancer
+- **AWS ECR**: Container registry
+- **Kustomize**: Kubernetes configuration management
 
-```bash
-# Clone the repository
-git clone https://github.com/smari-jr/iit-assignment-app.git
-cd microservices
+### DevOps
+- **Docker**: Containerization
+- **GitHub Actions**: CI/CD pipeline
+- **Kubernetes**: Container orchestration
+- **Nginx**: Frontend web server
 
-# Configure EKS cluster access (if different from default)
-# Edit scripts/deploy-optimized.sh and change EKS_CLUSTER_NAME variable
-# Current default: EKS_CLUSTER_NAME="iit-test-dev-eks"
+## 🎯 Features
 
-# Deploy to Kubernetes (builds, pushes to ECR, and deploys)
-./scripts/deploy-optimized.sh
+### 🎮 Gaming Platform
+- **Product Catalog**: 15+ gaming products with categories
+- **Search & Filter**: Find games by category, platform, rating
+- **Shopping Cart**: Add products and manage orders
+- **User Reviews**: Rating and review system
+- **Real-time Data**: Live updates from PostgreSQL RDS
 
-# Or deploy specific components
-./scripts/deploy-optimized.sh build-only    # Build and push images only
-./scripts/deploy-optimized.sh deploy-only   # Deploy using existing images
-./scripts/deploy-optimized.sh verify        # Verify deployment status
-```
+### 📊 Analytics Dashboard
+- **Product Statistics**: Total products, categories, platforms
+- **User Metrics**: Registration data, activity tracking
+- **Top Rated Games**: Ranked by user ratings
+- **Database Status**: Real-time connection monitoring
+- **Inventory Overview**: Stock levels and total value
 
-### 2. Local Development
+### 🎨 User Experience
+- **Red Theme**: Consistent crimson color scheme
+- **Responsive Design**: Mobile and desktop optimized
+- **Interactive UI**: Hover effects and animations
+- **Fast Loading**: Optimized React builds
 
-```bash
-# Start all services with Docker Compose
-docker-compose up -d
+## 🚀 Quick Deployment
 
-# Access the application
-# - Frontend: http://localhost:3000
-# - Gaming Service: http://localhost:3001
-# - Order Service: http://localhost:3002
-# - Analytics Service: http://localhost:3003
+### GitHub Actions CI/CD Pipeline
 
-# Stop services
-docker-compose down
-```
+The repository includes a complete GitHub Actions pipeline that automatically:
 
-### 3. Verification
+1. **Builds** all microservices as Docker images
+2. **Pushes** to AWS ECR registry
+3. **Deploys** to EKS cluster using Kustomize
+4. **Runs** health checks and verification
 
-```bash
-# Check Kubernetes deployment status
-kubectl get pods -n gaming-microservices
-kubectl get services -n gaming-microservices
+#### Setup Instructions:
 
-# Or use the built-in verification
-./scripts/deploy-optimized.sh verify
-```
-
-## 📦 Services
-
-| Service | Port | Technology | Purpose | Database |
-|---------|------|------------|---------|-----------|
-| **Frontend** | 80 | React + Nginx | User interface and routing | - |
-| **Gaming Service** | 3001 | Node.js + Express | Authentication, user management, products | PostgreSQL |
-| **Order Service** | 3002 | Node.js + Express | Order processing and payments | PostgreSQL |
-| **Analytics Service** | 3003 | Node.js + Express | Event tracking and analytics | PostgreSQL + ClickHouse |
-
-### Service Communication
-
-Services communicate via Kubernetes ClusterIP services using DNS-based service discovery:
-- `gaming-service:3001` - Gaming service endpoint
-- `order-service:3002` - Order service endpoint  
-- `analytics-service:3003` - Analytics service endpoint
-- `postgres-service:5432` - PostgreSQL database
-- `clickhouse-service:8123` - ClickHouse analytics database
-
-## 🛠️ Infrastructure
-
-### Kubernetes Configuration
-
-The platform uses **Kustomize** for Kubernetes configuration management:
-
-```
-kustomize/base/
-├── namespace.yaml           # gaming-microservices namespace
-├── secrets.yaml            # Secrets and ConfigMap
-├── postgres.yaml           # PostgreSQL database + service
-├── clickhouse.yaml         # ClickHouse analytics DB + service  
-├── frontend.yaml           # React frontend + service
-├── gaming-service.yaml     # Gaming microservice + service
-├── order-service.yaml      # Order processing + service
-├── analytics-service.yaml  # Analytics processing + service
-├── ingress.yaml            # Ingress controller configuration
-├── network-policy.yaml     # Service communication policies
-├── health-check.yaml       # Health monitoring service
-└── kustomization.yaml      # Kustomize configuration
-```
-
-### AWS Infrastructure
-
-- **EKS Cluster**: `776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/`
-- **ECR Registry**: Container image registry
-- **Load Balancer**: AWS Application Load Balancer via Ingress
-- **Persistent Storage**: EBS volumes for database persistence
-
-##  ClickHouse Analytics Features
-
-The Analytics Service provides:
-- **Page Visit Tracking**: Real-time page view analytics
-- **User Behavior**: Session tracking and user journey analysis
-- **High Performance**: ClickHouse for fast analytical queries on large datasets
-- **Data Retention**: Configurable TTL policies for data lifecycle management
-
-### ClickHouse Schema
-```sql
-CREATE TABLE page_visits (
-    id UUID DEFAULT generateUUIDv4(),
-    user_id String,
-    page_path String,
-    timestamp DateTime,
-    session_id String,
-    user_agent String,
-    ip_address String,
-    referrer String,
-    country String,
-    device_type String
-) ENGINE = MergeTree()
-PARTITION BY toYYYYMM(timestamp)
-ORDER BY (timestamp, user_id)
-TTL timestamp + INTERVAL 12 MONTH;
-```
-
-## � API Documentation
-
-### Gaming Service
-- `GET /api/games` - List all games
-- `POST /api/games` - Create new game
-- `GET /api/games/:id` - Get game details
-- `GET /health` - Health check
-
-### Order Service
-- `POST /api/orders` - Create new order
-- `GET /api/orders/:id` - Get order status
-- `PUT /api/orders/:id` - Update order
-- `GET /health` - Health check
-
-### Analytics Service
-- `POST /api/analytics/track` - Track page visit
-- `GET /api/analytics/stats` - Get analytics data
-- `GET /api/analytics/visits` - Get page visit statistics
-- `GET /health` - Health check
-
-## 🔧 Development Workflow
-
-### Local Testing
-
-```bash
-# Test individual services
-docker-compose logs frontend
-docker-compose logs gaming-service
-
-# Access databases
-docker-compose exec postgres psql -U postgres -d lugx_gaming
-docker-compose exec clickhouse clickhouse-client
-```
-
-### Adding a New Service
-
-1. Create service directory: `services/new-service/`
-2. Add Dockerfile and application code
-3. Create Kubernetes manifests in `kustomize/base/new-service.yaml`
-4. Update `kustomize/base/kustomization.yaml`
-5. Update deployment script if needed
-
-## �️ Security
-
-### Secrets Management
-- Environment variables stored in Kubernetes secrets
-- ECR authentication via IAM roles
-- Database credentials managed through Kubernetes
-
-### Network Security
-- Services communicate internally via Kubernetes service discovery
-- External access controlled via AWS ALB
-- Database access restricted to internal services
-
-## 🚀 Production Deployment
-
-### Prerequisites
-
-1. **AWS Setup**:
+1. **Fork/Clone this repository**
+2. **Add GitHub Secrets**:
+   ```
+   AWS_ACCESS_KEY_ID=your_access_key
+   AWS_SECRET_ACCESS_KEY=your_secret_key
+   ```
+3. **Push to trigger deployment**:
    ```bash
-   aws configure
-   aws eks update-kubeconfig --region ap-southeast-1 --name your-cluster-name
+   git push origin main      # Deploys to production
+   git push origin develop   # Deploys to development
    ```
 
-2. **Required AWS Permissions**:
-   - EKS cluster access
-   - ECR push/pull permissions
+### Manual Deployment
 
-### Scaling Configuration
+If you prefer manual deployment:
 
-Production environment includes:
-- **Frontend**: 2 replicas
-- **Gaming Service**: 2 replicas  
-- **Order Service**: 2 replicas
-- **Analytics Service**: 2 replicas
-- **Databases**: Single replicas with persistent storage
-
-## 🛠️ Troubleshooting
-
-### Common Issues
-
-#### Build Failures
 ```bash
-# Check Docker daemon
-docker info
+# 1. Login to ECR
+aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com
 
-# Clean up Docker resources
-docker system prune -f
+# 2. Build and push images
+cd services/frontend
+docker build -t 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/frontend:latest .
+docker push 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/frontend:latest
+
+# 3. Deploy to EKS
+aws eks update-kubeconfig --region ap-southeast-1 --name iit-eks-tests-01
+kubectl apply -k kustomize/overlays/production
 ```
 
-#### Deployment Issues
-```bash
-# Check Kubernetes cluster connection
-kubectl cluster-info
+## 🗄️ Database Setup
 
-# View pod status and logs
-kubectl get pods -n gaming-microservices
-kubectl describe pod <pod-name> -n gaming-microservices
-kubectl logs <pod-name> -n gaming-microservices
+### RDS Configuration
+- **Host**: `iit-rds-tests-01.cfwsc626ix76.ap-southeast-1.rds.amazonaws.com`
+- **Database**: PostgreSQL with 15 gaming products, 9 users, reviews
+
+### Mock Data Included
+- Gaming products across 7 categories
+- User accounts and profiles
+- Product reviews and ratings
+- Order history
+
+## 📁 Project Structure
+
+```
+lugx-application/
+├── .github/workflows/
+│   └── deploy-to-eks.yml          # Complete CI/CD pipeline
+├── services/
+│   ├── frontend/                  # React application
+│   ├── gaming-service/            # Products API
+│   ├── order-service/             # Order management
+│   ├── analytics-service/         # Analytics API
+│   └── health-check/              # Health monitoring
+├── kustomize/
+│   ├── base/                      # Base K8s configs
+│   └── overlays/
+│       ├── dev/                   # Development env
+│       └── production/            # Production env
+├── database/
+│   └── init-scripts/              # Database setup
+└── scripts/
+    └── deploy-optimized.sh        # Deployment helper
 ```
 
-#### Service Communication Issues
+## 📊 API Endpoints
+
+### Live API Testing
+All APIs are accessible via the ALB:
+
 ```bash
-# Test service connectivity
-kubectl exec -it <frontend-pod> -n gaming-microservices -- curl http://gaming-service:3001/health
+# Products API
+curl "http://k8s-lugxgami-gamingmi-04b5035527-659051128.ap-southeast-1.elb.amazonaws.com/api/products"
+
+# Users API  
+curl "http://k8s-lugxgami-gamingmi-04b5035527-659051128.ap-southeast-1.elb.amazonaws.com/api/users"
+
+# Health Check
+curl "http://k8s-lugxgami-gamingmi-04b5035527-659051128.ap-southeast-1.elb.amazonaws.com/health"
 ```
 
-## 🎯 Features Implemented
+## 🔧 Environment Configuration
 
-1. **Microservices Architecture**: Four independent services with clear separation of concerns
-2. **ClickHouse Integration**: High-performance analytics database for tracking user behavior
-3. **Containerization**: Complete Docker setup with Kubernetes orchestration
-4. **Kustomize Templates**: Professional Kubernetes configuration management
-5. **CI/CD Pipeline**: Automated deployment scripts
-6. **AWS EKS Integration**: Production-ready cloud deployment
-7. **Security**: JWT authentication, input validation, secure container practices
-8. **Monitoring**: Health check endpoints and comprehensive logging
-9. **Scalability**: Production-ready replica configurations
+### Development vs Production
+
+The project supports both environments with Kustomize overlays:
+
+- **Development** (`kustomize/overlays/dev/`): Lower resource limits, debug logging
+- **Production** (`kustomize/overlays/production/`): Optimized for performance, security
+
+### Required Secrets
+
+```yaml
+# GitHub Secrets for CI/CD
+AWS_ACCESS_KEY_ID: your-aws-access-key
+AWS_SECRET_ACCESS_KEY: your-aws-secret-key
+
+# Application Secrets (in Kubernetes)
+DB_PASSWORD: database-password
+JWT_SECRET: jwt-signing-secret
+```
+
+## 🎨 UI Theme & Design
+
+### Red Color Palette
+- **Primary**: `#DC143C` (Crimson)
+- **Dark**: `#8B0000` (Dark Red)
+- **Medium**: `#B22222` (Fire Brick)
+- **Light**: `#FFCCCB` (Light Pink)
+- **Background**: `#FFE6E6` (Misty Rose)
+
+### Features
+- Fully responsive design
+- Interactive hover effects
+- Professional dashboard layouts
+- Consistent branding
+
+## 📈 Monitoring & Health
+
+### Built-in Health Checks
+- Kubernetes liveness/readiness probes
+- Database connectivity verification
+- Service-to-service communication tests
+- Frontend availability monitoring
+
+### Monitoring Commands
+```bash
+# Check all pods
+kubectl get pods -n lugx-gaming
+
+# View logs
+kubectl logs -f deployment/frontend -n lugx-gaming
+
+# Check ingress
+kubectl get ingress -n lugx-gaming
+```
+
+## 🛡️ Security Features
+
+- **JWT Authentication**: Secure API endpoints
+- **Kubernetes Network Policies**: Service isolation
+- **AWS Security Groups**: Database protection
+- **Environment Secrets**: Encrypted configuration
+- **HTTPS Ready**: SSL/TLS support
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+3. Make your changes
+4. Test locally: `npm test`
+5. Commit: `git commit -m 'Add amazing feature'`
+6. Push: `git push origin feature/amazing-feature`
+7. Create Pull Request
+
+## 🆘 Troubleshooting
+
+### Common Issues
+
+**Deployment Fails**: Check AWS credentials and EKS access
+```bash
+aws sts get-caller-identity
+kubectl auth can-i create deployments --namespace=lugx-gaming
+```
+
+**Images Not Pulling**: Verify ECR permissions
+```bash
+aws ecr describe-repositories --region ap-southeast-1
+```
+
+**Database Connection**: Check RDS security groups and credentials
+```bash
+# Test from pod
+kubectl exec -it deployment/gaming-service -n lugx-gaming -- nc -zv iit-rds-tests-01.cfwsc626ix76.ap-southeast-1.rds.amazonaws.com 5432
+```
+
+## 📞 Support
+
+- **Issues**: Create GitHub issue
+- **Documentation**: Check inline code comments
+- **Logs**: Use `kubectl logs` commands above
 
 ---
 
-**LUGX Gaming Platform** - Built with ❤️ for cloud-native gaming experiences 🚀
+## 🎉 Success Metrics
+
+✅ **Fully Deployed**: All 5 microservices running on EKS  
+✅ **Database Connected**: PostgreSQL RDS with 15+ products  
+✅ **CI/CD Pipeline**: Automated GitHub Actions deployment  
+✅ **Public Access**: ALB providing internet access  
+✅ **Red Theme**: Complete UI styling implemented  
+✅ **Analytics Dashboard**: Real-time data visualization  
+
+**🎮 Your Lugx Gaming Platform is Ready! 🚀**
+
+Visit: [http://k8s-lugxgami-gamingmi-04b5035527-659051128.ap-southeast-1.elb.amazonaws.com](http://k8s-lugxgami-gamingmi-04b5035527-659051128.ap-southeast-1.elb.amazonaws.com)

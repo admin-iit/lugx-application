@@ -19,8 +19,8 @@ on:
 
 env:
   AWS_REGION: ap-southeast-1
-  ECR_REGISTRY: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com
-  EKS_CLUSTER_NAME: iit-eks-cluster
+  ECR_REGISTRY: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com
+  EKS_CLUSTER_NAME: iit-test-dev-eks
   NAMESPACE: lugx-gaming
 
 jobs:
@@ -67,39 +67,39 @@ jobs:
       - name: Build and push Frontend
         run: |
           cd services/frontend
-          docker build --platform linux/amd64 -t $ECR_REGISTRY/iit-gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }} .
-          docker push $ECR_REGISTRY/iit-gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }}
+          docker build --platform linux/amd64 -t $ECR_REGISTRY/gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }} .
+          docker push $ECR_REGISTRY/gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }}
           
           # Also push as latest
-          docker tag $ECR_REGISTRY/iit-gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }} $ECR_REGISTRY/iit-gaming-microservices/frontend:latest
-          docker push $ECR_REGISTRY/iit-gaming-microservices/frontend:latest
+          docker tag $ECR_REGISTRY/gaming-microservices/frontend:${{ steps.tags.outputs.frontend-tag }} $ECR_REGISTRY/gaming-microservices/frontend:latest
+          docker push $ECR_REGISTRY/gaming-microservices/frontend:latest
 
       - name: Build and push Gaming Service
         run: |
           cd services/gaming-service
-          docker build --platform linux/amd64 -t $ECR_REGISTRY/iit-gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }} .
-          docker push $ECR_REGISTRY/iit-gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }}
+          docker build --platform linux/amd64 -t $ECR_REGISTRY/gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }} .
+          docker push $ECR_REGISTRY/gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }}
           
-          docker tag $ECR_REGISTRY/iit-gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }} $ECR_REGISTRY/iit-gaming-microservices/gaming-service:latest
-          docker push $ECR_REGISTRY/iit-gaming-microservices/gaming-service:latest
+          docker tag $ECR_REGISTRY/gaming-microservices/gaming-service:${{ steps.tags.outputs.gaming-tag }} $ECR_REGISTRY/gaming-microservices/gaming-service:latest
+          docker push $ECR_REGISTRY/gaming-microservices/gaming-service:latest
 
       - name: Build and push Order Service
         run: |
           cd services/order-service
-          docker build --platform linux/amd64 -t $ECR_REGISTRY/iit-gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }} .
-          docker push $ECR_REGISTRY/iit-gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }}
+          docker build --platform linux/amd64 -t $ECR_REGISTRY/gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }} .
+          docker push $ECR_REGISTRY/gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }}
           
-          docker tag $ECR_REGISTRY/iit-gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }} $ECR_REGISTRY/iit-gaming-microservices/order-service:latest
-          docker push $ECR_REGISTRY/iit-gaming-microservices/order-service:latest
+          docker tag $ECR_REGISTRY/gaming-microservices/order-service:${{ steps.tags.outputs.order-tag }} $ECR_REGISTRY/gaming-microservices/order-service:latest
+          docker push $ECR_REGISTRY/gaming-microservices/order-service:latest
 
       - name: Build and push Analytics Service
         run: |
           cd services/analytics-service
-          docker build --platform linux/amd64 -t $ECR_REGISTRY/iit-gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }} .
-          docker push $ECR_REGISTRY/iit-gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }}
+          docker build --platform linux/amd64 -t $ECR_REGISTRY/gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }} .
+          docker push $ECR_REGISTRY/gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }}
           
-          docker tag $ECR_REGISTRY/iit-gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }} $ECR_REGISTRY/iit-gaming-microservices/analytics-service:latest
-          docker push $ECR_REGISTRY/iit-gaming-microservices/analytics-service:latest
+          docker tag $ECR_REGISTRY/gaming-microservices/analytics-service:${{ steps.tags.outputs.analytics-tag }} $ECR_REGISTRY/gaming-microservices/analytics-service:latest
+          docker push $ECR_REGISTRY/gaming-microservices/analytics-service:latest
 
   # Job 2: Deploy to Kubernetes
   deploy:
@@ -201,7 +201,7 @@ jobs:
           echo "Configuring RDS security groups for EKS access..."
           
           # Get RDS and EKS security group IDs
-          RDS_SG_ID=$(aws rds describe-db-instances --region $AWS_REGION --query "DBInstances[?DBInstanceIdentifier=='iit-psql-db'].VpcSecurityGroups[0].VpcSecurityGroupId" --output text 2>/dev/null || echo "None")
+          RDS_SG_ID=$(aws rds describe-db-instances --region $AWS_REGION --query "DBInstances[?DBInstanceIdentifier=='iit-test-dev-db'].VpcSecurityGroups[0].VpcSecurityGroupId" --output text 2>/dev/null || echo "None")
           EKS_SG_ID=$(aws eks describe-cluster --region $AWS_REGION --name $EKS_CLUSTER_NAME --query "cluster.resourcesVpcConfig.clusterSecurityGroupId" --output text 2>/dev/null || echo "None")
           VPC_ID=$(aws eks describe-cluster --region $AWS_REGION --name $EKS_CLUSTER_NAME --query "cluster.resourcesVpcConfig.vpcId" --output text 2>/dev/null || echo "None")
           VPC_CIDR=$(aws ec2 describe-vpcs --region $AWS_REGION --vpc-ids $VPC_ID --query "Vpcs[0].CidrBlock" --output text 2>/dev/null || echo "None")

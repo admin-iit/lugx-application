@@ -13,17 +13,16 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-
 # Configuration
-RDS_ENDPOINT="iit-psql-db.cfwsc626ix76.ap-southeast-1.rds.amazonaws.com"
-DB_NAME="postgres"
-DB_USER="iit_admin"
-DB_PASSWORD="SevenEleven12"
+RDS_ENDPOINT="iit-test-dev-db.cv0gc48uo7w1.ap-southeast-1.rds.amazonaws.com"
+DB_NAME="lugx_gaming_dev"
+DB_USER="dbadmin"
+DB_PASSWORD="LionKing1234"
 DB_PORT="5432"
 REGION="ap-southeast-1"
 
 # EKS cluster configuration
-EKS_CLUSTER_NAME="iit-eks-cluster"
+EKS_CLUSTER_NAME="iit-test-dev-eks"
 NAMESPACE="lugx-gaming"
 
 # Function to print colored output
@@ -77,7 +76,7 @@ get_rds_security_group() {
     # Get RDS instance details
     local rds_sg_id=$(aws rds describe-db-instances \
         --region $REGION \
-        --query "DBInstances[?DBInstanceIdentifier=='iit-psql-db'].VpcSecurityGroups[0].VpcSecurityGroupId" \
+        --query "DBInstances[?DBInstanceIdentifier=='iit-test-dev-db'].VpcSecurityGroups[0].VpcSecurityGroupId" \
         --output text 2>/dev/null)
     
     if [ "$rds_sg_id" = "None" ] || [ -z "$rds_sg_id" ]; then

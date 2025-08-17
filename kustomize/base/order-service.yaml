@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: order-service
-        image: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/order-service:ssl-fix-20250803-233400
+        image: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/order-service:ssl-fix-20250803-233400
         imagePullPolicy: Always
         ports:
         - containerPort: 3002

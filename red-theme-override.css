@@ -1,0 +1,177 @@
+/* Red Theme Override CSS */
+body {
+  background: #FFE6E6 !important;
+  color: #8B0000 !important;
+}
+
+.App {
+  background: #FFE6E6 !important;
+}
+
+/* Navigation */
+.navigation {
+  background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%) !important;
+}
+
+/* Gaming Component */
+.gaming-container {
+  background: #FFE6E6 !important;
+}
+
+.gaming-header {
+  border-bottom: 2px solid #FFB3B3 !important;
+}
+
+.gaming-header h2 {
+  color: #8B0000 !important;
+}
+
+.cart-info {
+  background: #DC143C !important;
+}
+
+.add-product-btn, .add-first-product-btn {
+  background: #B22222 !important;
+}
+
+.add-product-btn:hover, .add-first-product-btn:hover {
+  background: #8B0000 !important;
+}
+
+.product-card {
+  background: #FFCCCB !important;
+  border: 1px solid #FFB3B3 !important;
+}
+
+.product-info h3 {
+  color: #8B0000 !important;
+}
+
+.product-description {
+  color: #B22222 !important;
+}
+
+.category, .platform {
+  background: #FFB3B3 !important;
+  color: #8B0000 !important;
+  border: 1px solid #DC143C !important;
+}
+
+.price {
+  color: #DC143C !important;
+}
+
+.add-to-cart-btn {
+  background: #B22222 !important;
+}
+
+.add-to-cart-btn:hover {
+  background: #8B0000 !important;
+}
+
+/* Selection and scrollbar */
+::selection {
+  background: #DC143C !important;
+  color: white !important;
+}
+
+::-moz-selection {
+  background: #DC143C !important;
+  color: white !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFB3B3 !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DC143C !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B22222 !important;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  border: 3px solid #FFB3B3 !important;
+  border-top: 3px solid #DC143C !important;
+}
+
+/* Home page styles */
+.hero {
+  background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%) !important;
+}
+
+.features {
+  background: #FFE6E6 !important;
+}
+
+.feature-card {
+  background: #FFCCCB !important;
+  border: 1px solid #FFB3B3 !important;
+}
+
+.feature-card h3 {
+  color: #8B0000 !important;
+}
+
+.feature-card p {
+  color: #B22222 !important;
+}
+
+/* Auth forms */
+.auth-container {
+  background: #FFE6E6 !important;
+}
+
+.auth-form {
+  background: #FFCCCB !important;
+  border: 2px solid #DC143C !important;
+}
+
+.auth-form h2 {
+  color: #8B0000 !important;
+}
+
+.auth-form input {
+  border: 1px solid #DC143C !important;
+  background: #FFE6E6 !important;
+  color: #8B0000 !important;
+}
+
+.auth-form button {
+  background: #B22222 !important;
+}
+
+.auth-form button:hover {
+  background: #8B0000 !important;
+}
+
+/* Orders page */
+.orders-container {
+  background: #FFE6E6 !important;
+}
+
+.order-card {
+  background: #FFCCCB !important;
+  border: 1px solid #FFB3B3 !important;
+}
+
+.order-card h3 {
+  color: #8B0000 !important;
+}
+
+/* Analytics page */
+.analytics-container {
+  background: #FFE6E6 !important;
+}
+
+.analytics-card {
+  background: #FFCCCB !important;
+  border: 1px solid #FFB3B3 !important;
+}
+
+.analytics-card h3 {
+  color: #8B0000 !important;
+}

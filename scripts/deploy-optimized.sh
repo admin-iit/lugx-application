@@ -20,7 +20,7 @@ set -euo pipefail
 
 # Configuration
 REGION="ap-southeast-1"
-ECR_REGISTRY="776231021342.dkr.ecr.ap-southeast-1.amazonaws.com"
+ECR_REGISTRY="036160411895.dkr.ecr.ap-southeast-1.amazonaws.com"
 NAMESPACE="lugx-gaming"
 REPO_PREFIX="gaming-microservices"
 EKS_CLUSTER_NAME="iit-test-dev-eks"
