@@ -21,8 +21,5 @@ images:
   - name: analytics-service
     newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/analytics-service
     newTag: latest
-  - name: health-check
-    newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/health-check
-    newTag: latest
 
 namespace: lugx-gaming
