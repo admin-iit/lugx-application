@@ -102,6 +102,7 @@ jobs:
     - name: Deploy to EKS (Development)
       if: github.ref == 'refs/heads/develop'
       run: |
+        cd lugx-application
         if [ ! -d "kustomize/overlays/dev" ]; then
           echo "ERROR: kustomize/overlays/dev directory does not exist. Please check your repository structure and commit status.";
           exit 1;
@@ -116,6 +117,7 @@ jobs:
     - name: Deploy to EKS (Production)
       if: github.ref == 'refs/heads/main'
       run: |
+        cd lugx-application
         if [ ! -d "kustomize/overlays/dev" ]; then
           echo "ERROR: kustomize/overlays/dev directory does not exist. Please check your repository structure and commit status.";
           exit 1;
