@@ -9,17 +9,20 @@ patchesStrategicMerge:
   - secret-patch.yaml
 
 images:
-  - name: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/frontend
+  - name: frontend
     newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/frontend
     newTag: latest
-  - name: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/gaming-service
+  - name: gaming-service
     newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/gaming-service
     newTag: latest
-  - name: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/order-service
+  - name: order-service
     newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/order-service
     newTag: latest
-  - name: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/analytics-service
+  - name: analytics-service
     newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/analytics-service
     newTag: latest
+  - name: health-check
+    newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/health-check
+    newTag: latest
 
-namespace: gaming-microservices
+namespace: lugx-gaming
