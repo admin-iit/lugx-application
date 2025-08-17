@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/frontend:port-fix-amd64-20250803-235857
+        image: frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

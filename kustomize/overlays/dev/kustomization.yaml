@@ -9,6 +9,7 @@ resources:
 patches:
 - path: configmap-patch.yaml
 - path: secret-patch.yaml
+- path: ingress-patch.yaml
 
 labels:
 - pairs:
@@ -16,14 +17,21 @@ labels:
     app.kubernetes.io/instance: dev
 
 images:
-- name: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/frontend
-  newTag: port-fix-amd64-20250803-235857
-- name: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/gaming-service
-  newTag: ssl-fix-20250803-233227
-- name: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/order-service
-  newTag: ssl-fix-20250803-233400
-- name: 036160411895.dkr.ecr.ap-southeast-1.amazonaws.com/gaming-microservices/analytics-service
-  newTag: clickhouse-url-fixed
+  - name: frontend
+    newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/frontend
+    newTag: latest
+  - name: gaming-service
+    newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/gaming-service
+    newTag: latest
+  - name: order-service
+    newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/order-service
+    newTag: latest
+  - name: analytics-service
+    newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/analytics-service
+    newTag: latest
+  - name: health-check
+    newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/health-check
+    newTag: latest
 
 replicas:
 - name: frontend

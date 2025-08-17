@@ -47,7 +47,9 @@ export const GamingProvider = ({ children }) => {
   const loadProducts = async () => {
     dispatch({ type: 'SET_LOADING', payload: true });
     try {
-      const products = await api.gaming.getProducts();
+      const response = await api.gaming.getProducts();
+      // Extract the data array from the API response
+      const products = response.data || response;
       dispatch({ type: 'SET_PRODUCTS', payload: products });
     } catch (error) {
       dispatch({ type: 'SET_ERROR', payload: error.message });
