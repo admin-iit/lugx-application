@@ -16,6 +16,7 @@ jobs:
   # =============================
   # 1. Build and Push Images
   # Dummy change to enable commit
+  # Another dummy change for deployment trigger
   # =============================
   build-and-deploy:
     name: Build and Deploy to EKS
