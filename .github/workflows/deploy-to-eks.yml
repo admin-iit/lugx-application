@@ -102,10 +102,6 @@ jobs:
     - name: Deploy to EKS (Development)
       if: github.ref == 'refs/heads/develop'
       run: |
-        if [ ! -d "kustomize/overlays/dev" ]; then
-          echo "ERROR: kustomize/overlays/dev directory does not exist. Please check your repository structure and commit status.";
-          exit 1;
-        fi
         cd kustomize/overlays/dev
         kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/frontend:${{ github.sha }}
         kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }}
