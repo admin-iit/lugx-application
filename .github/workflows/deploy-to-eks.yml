@@ -13,11 +13,15 @@ env:
   ECR_REPOSITORY_PREFIX: iit-gaming-microservices
 
 jobs:
+  # =============================
+  # 1. Build and Push Images
+  # =============================
   build-and-deploy:
     name: Build and Deploy to EKS
     runs-on: ubuntu-latest
     
     steps:
+    # --- Build and Push Images ---
     - name: Checkout code
       uses: actions/checkout@v4
 
@@ -85,6 +89,9 @@ jobs:
 
 
     - name: Install kubectl
+    # =============================
+    # 2. Deploy to EKS
+    # =============================
       uses: azure/setup-kubectl@v3
       with:
         version: 'v1.28.0'
@@ -100,24 +107,31 @@ jobs:
         sudo mv kustomize /usr/local/bin/
 
     - name: Deploy to EKS (Development)
+    # --- Deploy to EKS (Development) ---
       if: github.ref == 'refs/heads/develop'
       run: |
-        kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/frontend:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
-        kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
-        kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
-        kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
+        cd kustomize/overlays/dev
+        kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/frontend:${{ github.sha }}
+        kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }}
+        kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }}
+        kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }}
+        cd ../..
         kubectl apply -k kustomize/overlays/dev
 
     - name: Deploy to EKS (Production)
+    # --- Deploy to EKS (Production) ---
       if: github.ref == 'refs/heads/main'
       run: |
-        kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/frontend:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
-        kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
-        kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
-        kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
+        cd kustomize/overlays/dev
+        kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/frontend:${{ github.sha }}
+        kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }}
+        kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }}
+        kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }}
+        cd ../..
         kubectl apply -k kustomize/overlays/dev
 
     - name: Verify deployment
+    # --- Verify and Wait for Deployment ---
       run: |
         kubectl get pods -n lugx-gaming
         kubectl get services -n lugx-gaming
@@ -131,6 +145,7 @@ jobs:
         kubectl rollout status deployment/analytics-service -n lugx-gaming --timeout=300s
 
     - name: Run health checks
+    # --- Run Health Checks ---
       run: |
         echo "Waiting for ALB to be ready..."
         sleep 60
@@ -155,6 +170,10 @@ jobs:
     if: always()
     
     steps:
+    # =============================
+    # 3. Notify Deployment Status
+    # =============================
+    # --- Notify Deployment Status ---
     - name: Deployment Success Notification
       if: needs.build-and-deploy.result == 'success'
       run: |
