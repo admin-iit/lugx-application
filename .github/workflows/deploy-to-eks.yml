@@ -14,8 +14,8 @@ env:
 
 jobs:
   # =============================
-  # Dummy change for commit button test
   # 1. Build and Push Images
+  # Dummy change to enable commit
   # =============================
   build-and-deploy:
     name: Build and Deploy to EKS
