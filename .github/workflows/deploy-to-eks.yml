@@ -102,23 +102,19 @@ jobs:
     - name: Deploy to EKS (Development)
       if: github.ref == 'refs/heads/develop'
       run: |
-        pushd kustomize/overlays/dev
-        kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/frontend:${{ github.sha }}
-        kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }}
-        kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }}
-        kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }}
-        popd
+        kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/frontend:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
+        kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
+        kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
+        kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
         kubectl apply -k kustomize/overlays/dev
 
     - name: Deploy to EKS (Production)
       if: github.ref == 'refs/heads/main'
       run: |
-        pushd kustomize/overlays/dev
-        kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/frontend:${{ github.sha }}
-        kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }}
-        kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }}
-        kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }}
-        popd
+        kustomize edit set image frontend=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/frontend:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
+        kustomize edit set image gaming-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/gaming-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
+        kustomize edit set image order-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/order-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
+        kustomize edit set image analytics-service=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_PREFIX }}/analytics-service:${{ github.sha }} --kustomization kustomize/overlays/dev/kustomization.yaml
         kubectl apply -k kustomize/overlays/dev
 
     - name: Verify deployment
