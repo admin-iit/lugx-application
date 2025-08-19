@@ -19,7 +19,7 @@ labels:
 images:
   - name: frontend
     newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/frontend
-    newTag: latest
+    newTag: 7534009435c2208822eb43b9a31132f3814e20fb
   - name: gaming-service
     newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/gaming-service
     newTag: latest
@@ -28,7 +28,7 @@ images:
     newTag: latest
   - name: analytics-service
     newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/analytics-service
-    newTag: latest
+    newTag: 7534009435c2208822eb43b9a31132f3814e20fb
   - name: health-check
     newName: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/health-check
     newTag: latest
