@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: frontend:latest
+        image: 776231021342.dkr.ecr.ap-southeast-1.amazonaws.com/iit-gaming-microservices/frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
